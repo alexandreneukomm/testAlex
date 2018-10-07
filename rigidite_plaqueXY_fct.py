@@ -11,7 +11,6 @@ def calcul_rigi(a,b,c,d,e):
     Xrigi = round(f / (a* 1000),0)
     Yrigi = f / (b * 1000)
     Zrigi = f / (c * 1000)
-    Zrigi=( "%.2e"% Zrigi)
     rigiX.append(Xrigi)
     rigiY.append(Yrigi)
     rigiZ.append(Zrigi)
