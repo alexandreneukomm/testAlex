@@ -1,48 +1,72 @@
+#!/usr/bin/env python3
+# AGA: Bonne pratique pour forcer l'utilisation de python 3 (je crois... en tout cas je le vois tjrs en début des codes)
+
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
-from sympy import *
 
 # Fonctions
+# AGC: Essaie d'avoir des noms les plus précis possible.
+# En effet ce n'est pas juste une fonction de graph générique, mais une fonction qui est déjà spécialisée
+def graph_avance_filetage(FZ, N, F, fzlimit, mode ="PORTRAIT"):
 
-def graph(a):
-    fig, ax = plt.subplots(figsize=a)
+    fig, ax = plt.subplots(figsize=get_figsize(mode))
     plt.subplots_adjust()
 
-    ax.plot(fz, f1, label="Vitesse de rotation de {} tr/min".format(n1))
-    ax.plot(fz, f2, label="Vitesse de rotation de {} tr/min".format(n2))
-    ax.plot(fz, f3, label="Vitesse de rotation de {} tr/min".format(n3))
-    ax.plot(fz, f4, label="Vitesse de rotation de {} tr/min".format(n4))
+    for ix, n_ix in enumerate(N):
+        ax.plot(FZ, F[ix], label="Vitesse de rotation de {} tr/min".format(n_ix))
+
     ax.set(xlabel="Pas de filetage (mm)", ylabel='Avance (mm/min)',
-           title='Vitesse avance de l\'axe Z fonction du pas de filetage')
+        title='Vitesse avance de l\'axe Z fonction du pas de filetage')
     plt.grid()
 
     # Draw a default vline at x=... that spans the yrange
     color = 'tab:brown'
     plt.axhline(y=fzlimit, color=color)
     ax.annotate('Limite d\'avance de l\'axe Z', (0.01, fzlimit + 1000), textcoords='data', color=color)
-    # ax.annotate('Rapport longueur / dimaètre: {}'.format(rapport) , (llimite+1, max(y1)-max(y1)*0.05), textcoords='data', color = color,rotation=90)
+    # ax.annotate('Rapport longueur / diamètre: {}'.format(rapport) , (limite+1, max(y1)-max(y1)*0.05),
+    #   textcoords='data', color = color,rotation=90)
 
     plt.legend(loc='best')
 
+# AGC: Tu me diras que cette fonction prend plus de texte que ce que tu avais fait,
+# mais l'idée ce serait de déplacer ça dans un fichier tools.py que tu vas importer dans tous tes codes.
+# Comme ça tu le fais une fois et tu l'utilise partout, et là tu as un gain.
+def get_figsize(mode):
+    if "PORTRAIT" in mode:
+        return (7, 4)
+    if "PAYSAGE" in mode:
+        return (9.2, 5.8)
+    # If mode not correct, return an error
+    print("Wrong mode choosen for plot figsize! Use PORTRAIT or PAYSAGE!")
+    exit(-1000)
 
-# Variables
-portrait = (7, 4)
-paysage = (9.2, 5.8)
-fz = np.arange(0.0, 1.7, 0.1) #longueur sortie fraise en mm
-n1 = 10000 # vitesse broche
-n2 = 20000 # vitesse broche
-n3 = 30000 # vitesse broche
-n4 = 40000 # vitesse broche
-fzlimit=16000
+# AGC: Bonne pratique en python: limiter pour avoir une seule entrée possible du programme (donc le main).
+# Dans ton cas précis ne pose pas de problème car tu run sur le fichier que tu utilise mais si tu veux par exemple
+# réutiliser une fonction définie ici dans un autre pogramme, tu vas inclure ce fichier.
+# Et là ça va ètre le bordel même en runnant le programme depuis un autre fichier.
+if __name__== '__main__':
 
-#Equations
-f1=fz*n1
-f2=fz*n2
-f3=fz*n3
-f4=fz*n4
+    # Variables
+    mode = "PORTRAIT" # AGC: Facultatif si portrait car valeur par défaut de la fonction graph
+    FZ = np.arange(0.0, 1.7, 0.1) # Longueur sortie fraise [mm]
+    N = np.arange(10000, 40000 + 1, 10000) # Avance [mm/min]
+    #  AGC: 400000+1 car la fonction np.arange à la borne limite max "exclusive" (pas sur du terme "exclusive" :-))
+    fzlimit = 16000 # Limite d'avance de l'axe Z [mm/min]
+    # AGC: J'ai tendance à mettre des majuscule pour indiquer un vecteur,
+    # d'ailleur je crois que c'est normalisé en math non?
 
-#Graphique
-graph(portrait)
+    # Equations
+    F = []
+    for n_i in N:
+        F.append(FZ * n_i)
+    # AGC: ici on peut discuter du fait de mettre les équations dans la fonction de graph ou non.
+    # En effet on a déjà une fonction spécifique pour l'affichage des avance filetage.
+    # Donc à prioris les calculs, qui sont également spécifiques pourrait être fait dans la fonction de graph.
+    # Ca supprime une boucle, cependant moi je préfère structurer en 1° Définition ou récupération des données,
+    # 2° Calculs 3° Affichage
+    # Du coup j'ai laissé les calculs la, quite à faire deux fois la boucle.
 
-plt.show()
+    # Graphique
+    graph_avance_filetage(FZ, N, F, fzlimit, mode)
+
+    plt.show()
