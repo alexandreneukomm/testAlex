@@ -15,16 +15,16 @@ def graph_avance_filetage(FZ, N, F, fzlimit, mode ="PORTRAIT"):
     for ix, n_ix in enumerate(N):
         ax.plot(FZ, F[ix], label="Vitesse de rotation de {} tr/min".format(n_ix))
 
-    ax.set(xlabel="Pas de filetage (mm)", ylabel='Avance (mm/min)',
-        title='Vitesse avance de l\'axe Z fonction du pas de filetage')
+    ax.set(xlabel="Pas de filetage (mm)", ylabel='Avance de l\'axe Z (mm/min)',
+        title='Vitesse d\'avance de l\'axe Z fonction du pas de filetage')
+    plt.xticks(np.arange(0, max(FZ)+0.1, 0.1))
+    plt.gca().set_ylim(0, fzlimit+5000)
     plt.grid()
 
     # Draw a default vline at x=... that spans the yrange
     color = 'tab:brown'
     plt.axhline(y=fzlimit, color=color)
-    ax.annotate('Limite d\'avance de l\'axe Z', (0.01, fzlimit + 1000), textcoords='data', color=color)
-    # ax.annotate('Rapport longueur / diamètre: {}'.format(rapport) , (limite+1, max(y1)-max(y1)*0.05),
-    #   textcoords='data', color = color,rotation=90)
+    ax.annotate('Limite d\'avance de l\'axe Z {} (mm/min)'.format(fzlimit), (0, fzlimit + 2500), textcoords='data', color=color, bbox=dict(boxstyle="round", fc="w"))
 
     plt.legend(loc='best')
 
@@ -48,9 +48,9 @@ if __name__== '__main__':
 
     # Variables
     mode = "PORTRAIT" # AGC: Facultatif si portrait car valeur par défaut de la fonction graph
-    FZ = np.arange(0.0, 1.7, 0.1) # Longueur sortie fraise [mm]
+    FZ = np.arange(0.0, 1.5 + 0.01, 0.1) # Pas du filet [mm]
     N = np.arange(10000, 40000 + 1, 10000) # Avance [mm/min]
-    #  AGC: 400000+1 car la fonction np.arange à la borne limite max "exclusive" (pas sur du terme "exclusive" :-))
+    #  AGC: 40000+1 car la fonction np.arange à la borne limite max "exclusive" (pas sur du terme "exclusive" :-))
     fzlimit = 16000 # Limite d'avance de l'axe Z [mm/min]
     # AGC: J'ai tendance à mettre des majuscule pour indiquer un vecteur,
     # d'ailleur je crois que c'est normalisé en math non?
