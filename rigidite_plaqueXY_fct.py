@@ -67,7 +67,7 @@ deplaX = 5.1e-5
 deplaY = 5.2e-5
 deplaZ = 1e-3
 
-calcul_rigi(deplaX, deplaY, deplaZ,posX,posY)
+calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
 
     # Simulation 2 a X19 Y-19
 posX = 19.1
@@ -76,7 +76,7 @@ deplaX = 4.8e-5
 deplaY = 5.4e-5
 deplaZ = 9.6e-4
 
-calcul_rigi(deplaX, deplaY, deplaZ,posX,posY)
+calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
 
 
     # Simulation 3 a X27 Y0
@@ -86,7 +86,7 @@ deplaX = 4.2e-5
 deplaY = 5.5e-5
 deplaZ = 6.3e-4
 
-calcul_rigi(deplaX, deplaY, deplaZ,posX,posY)
+calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
 
     # Simulation 4 a X19 Y-19
 posX = 19.1
@@ -95,7 +95,7 @@ deplaX = 3.9e-5
 deplaY = 5.4e-5
 deplaZ = 3.9e-4
 
-calcul_rigi(deplaX, deplaY, deplaZ,posX,posY)
+calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
 
     # Simulation 5 a X0 Y27
 posX = 0
@@ -104,7 +104,7 @@ deplaX = 3.8e-5
 deplaY = 5.2e-5
 deplaZ = 3.2e-4
 
-calcul_rigi(deplaX, deplaY, deplaZ,posX,posY)
+calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
 
     # Simulation 6 a X19 Y-19
 posX = -19.1
@@ -113,7 +113,7 @@ deplaX = 3.9e-5
 deplaY = 5.4e-5
 deplaZ = 3.9e-4
 
-calcul_rigi(deplaX, deplaY, deplaZ,posX,posY)
+calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
 
     # Simulation 3 a X27 Y0
 posX = -27
@@ -122,7 +122,7 @@ deplaX = 4.2e-5
 deplaY = 5.5e-5
 deplaZ = 6.3e-4
 
-calcul_rigi(deplaX, deplaY, deplaZ,posX,posY)
+calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
 
     # Simulation 2 a X19 Y-19
 posX = -19.1
@@ -131,7 +131,7 @@ deplaX = 4.8e-5
 deplaY = 5.4e-5
 deplaZ = 9.6e-4
 
-calcul_rigi(deplaX, deplaY, deplaZ,posX,posY)
+calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
 
     # Simulation 1 a X0 Y-27
 posX = 0
@@ -140,13 +140,13 @@ deplaX = 5.1e-5
 deplaY = 5.2e-5
 deplaZ = 1e-3
 
-calcul_rigi(deplaX, deplaY, deplaZ,posX,posY)
+calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
 
     # calculs rigi
 
 rappX = round(max(rigiX)/min(rigiX), 2)
 rappY = round(max(rigiY)/min(rigiY), 2)
-rappZ = max(rigiZ)/min(rigiZ)
+rappZ = round(max(rigiZ)/min(rigiZ), 2)
 
 maxmax = max(max(rigiX),max(rigiY),max(rigiZ))
 minmin = min(min(rigiX),min(rigiY),min(rigiZ))
