@@ -10,60 +10,78 @@ from random import*
 
 # Fonctions
 
-def Numero2(n):
-    L = [[None] * 2] * n
-    for k in range(n):
-        x, y = randint(50, 650), randint(50, 650)
-        L[k] = [x, y]
-    print(L)
-
-def constant (n, d, a):
+def constant (d, a): #d = numéro constant a = choix de la liste
     I = [None] * n
     for k in range(n):
         I[k] = d
         a.append(d)
 
-def croissante (a):
+def croissante (a): # a = choix de la liste
     for n_i in deplacement_positif:
         a.append(n_i)
 
-# def décroissante (a):
-#     for n_i in deplacement_positif:
-
-
+def decroissante (a): # a = choix de la liste
+    b=[]
+    for n_i in deplacement_positif:
+        b.append(n_i)
+    b.reverse()
+    a.extend(b)
 
 if __name__== '__main__':
-    a = 45
-    a= math.radians(a)
+    Y1 = []
+    Y2 = []
+    X = []
+    Y = []
+    a = 60
+    a_rad= math.radians(a)
 
     Y1min = 0
-    Y1max = 76
-    Y1min = Y1min
+    Y1max = 38
+    Y2min = Y1min
     Y2max = Y1max
-    pas = 1
+    pas = 0.1
     deplacement_positif = np.arange(0, Y1max + 0.1, pas)
-    deplacement_negatif = np.arange(Y1max, 0 + 0.1, pas)
 
     n = len(deplacement_positif)
 
-    print(n)
+    coco = np.array([[1, 2], [3, 4]])
+    gaga = np.array([5,6])
 
+    test=coco.dot(gaga)
 
-    cine_inverse = np.array([[tan(a), 1], [-tan(a), 1]])
-
-    Y1 = []
-    Y2 = []
-
-    #constant(pas, 5, Y1)
-    #constant(pas, 0, Y1)
-    croissante(Y1)
-    print(Y1)
-    # Y1.reverse()
-    # print(Y1)
-
-    pos_mot = np.array([Y1, [Y2]])
+    print(test)
+    cine_direct = np.array([[1/(2*tan(a_rad)), -1/(2*tan(a_rad))], [0.5, 0.5]])
+    print(cine_direct)
 
     plaqueXY = np.array([[],[]])
-    #
-    # plaqueXY = cine_inverse.dot(pos_mot)
-    #print(pos_mot)
+
+    # #Y1
+    croissante(Y1)
+    constant(Y1max,Y1)
+    decroissante(Y1)
+    constant(Y2min, Y1)
+
+    # #Y2
+    constant(Y2min, Y2)
+    croissante(Y2)
+    constant(Y1max, Y2)
+    decroissante(Y2)
+
+    pos_mot = np.array([Y1, Y2])
+
+    print(pos_mot)
+
+
+    plaqueXY = cine_direct.dot(pos_mot)
+
+    X = plaqueXY[0]
+    Y = plaqueXY[1]
+
+
+
+    fig, ax = plt.subplots()
+    plt.subplots_adjust()
+    plt.plot(X, Y)
+    ax.set(title='Angle des rails de {}°'.format(a))
+    plt.axis('equal')
+    plt.show()
