@@ -40,7 +40,7 @@ def graph(f):
         ax.text2D(0.05, 0.95, "Rapport rigidité max/min: \n Z {}".format(rappZ), transform=ax.transAxes)
 
     plt.gca().set_zlim(0, f)
-    print(ax.zaxis.get_major_ticks())
+
     # anotation
     ax.text(0, 0, 0, "Course de la machine", color='k')
 

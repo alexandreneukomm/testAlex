@@ -7,6 +7,8 @@ import pandas as pd
 import math
 from sympy import *
 from random import*
+import tools
+import os
 
 # Fonctions
 
@@ -28,10 +30,8 @@ def is_on_rail (x,y,a,l1,l2):
 
     return R1, R2
 
+COLOR = [['k', 'H.C. All', 'o'], ['tab:red', 'H.C. L1', 'o'], ['tab:blue', 'H.C. L2', 'o'], ['tab:green', 'OK', 'o']]
 
-COLOR = [['k', 'H.C. All', '+'], ['tab:red', 'H.C. L1', '+'], ['tab:blue', 'H.C. L2', '+'], ['tab:green', 'OK', r'$\heartsuit$']]
-
-#r'$\heartsuit$'
 def get_state_from_r1_r2(R1, R2):
     index = 0
 
@@ -42,10 +42,10 @@ def get_state_from_r1_r2(R1, R2):
 
     return COLOR[index]
 
-def plot_result_working_area(result_wa, a ,l1 ,l2):
-    size = 40
-    fig, ax = plt.subplots()
-    plt.subplots_adjust()
+def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode):
+    size = 2
+    fig, ax = plt.subplots(figsize=mode)
+    plt.subplots_adjust(left=0.07, bottom=0.1, right=0.9, top=0.88, wspace=0, hspace=0)
     compteur_pt_ok = 0
 
     for signeX in [-1,1]:
@@ -60,15 +60,26 @@ def plot_result_working_area(result_wa, a ,l1 ,l2):
     #plt.legend(('Model length', 'Data length', 'Total message length'), loc='best')
     ax.set(title='Angle des rails de {}°, {} pts couverts / L1={}, L2={}'.format(a, compteur_pt_ok, l1, l2))
     plt.axis('equal')
-    plt.show()
+    plt.gca().set_xlim(-40, 40)
 
+    if SAVE==True:
+        save_auto(name_file)
+        plt.show()
+    else:
+
+        plt.show()
+
+def save_auto(name_file):
+    plt.savefig(os.path.join(tools.save_path_pdf,name_file + '.pdf'), format='pdf')
+    plt.savefig(os.path.join(tools.save_path_pgf,name_file + '.pgf'), format='pgf')
 
 if __name__== '__main__':
-
-    a = 45 # angle rail l2
+    a = 45 # angle degrée rail l2
     l1 = 38 # longueur de sortie limite l1
     l2 = 38 # longueur de sortie limite l2
-    pas = 2
+    SAVE = True
+    name_file = 'zone_travail_{}_pays'.format(a)
+    pas = 1
     X = np.arange(0, 40+1, pas)
     Y = np.arange(0, 40+1, pas)
 
@@ -78,11 +89,9 @@ if __name__== '__main__':
             R1, R2 = is_on_rail(x, y, a, l1, l2)
             result.append([x, y, R1, R2])
 
-    print(result)
+    plot_result_working_area(result, a, l1, l2, tools.PAYSAGE)
 
-    plot_result_working_area(result, a, l1, l2)
-
-
+    # tools.exemple('coco')
 
     # fig, ax = plt.subplots()
     # plt.subplots_adjust()
