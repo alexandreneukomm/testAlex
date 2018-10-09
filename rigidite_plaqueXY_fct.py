@@ -20,9 +20,11 @@ def calcul_rigi(a,b,c,d,e):
 def graph(f):
     fig = plt.figure(figsize=paysage)
     plt.subplots_adjust(left=-0.02, bottom=0, right=1, top=0.88, wspace=0, hspace=0)
-    ax = fig.add_subplot(111, projection="3d")
+    #ax = fig.add_subplot(111, projection="3d")
+    ax= fig.gca(projection="3d")
     ax.set(xlabel="Position sur l'axe des X (mm)", ylabel="Position sur l'axe des Y (mm)", zlabel="Rigidité (N/m)",
            title='Espace de rigidité')
+
     # ax.ticklabel_format(axis='z', style='scientific', scilimits=(-1, 2))
     if f>2e7 :
         ax.scatter(X, Y, rigiX, label="Direction X", marker='^', alpha=1)
@@ -38,6 +40,7 @@ def graph(f):
         ax.text2D(0.05, 0.95, "Rapport rigidité max/min: \n Z {}".format(rappZ), transform=ax.transAxes)
 
     plt.gca().set_zlim(0, f)
+    print(ax.zaxis.get_major_ticks())
     # anotation
     ax.text(0, 0, 0, "Course de la machine", color='k')
 
