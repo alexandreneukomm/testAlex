@@ -64,9 +64,8 @@ def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode):
 
     if SAVE==True:
         tools.save_auto(name_file)
-        plt.show()
-    else:
-        plt.show()
+
+    plt.show()
 
 if __name__== '__main__':
     a = 45 # angle degrée rail l2
