@@ -8,7 +8,6 @@ import math
 from sympy import *
 from random import*
 import tools
-import os
 
 # Fonctions
 
@@ -43,7 +42,7 @@ def get_state_from_r1_r2(R1, R2):
     return COLOR[index]
 
 def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode):
-    size = 100
+    size = 10
     fig, ax = plt.subplots(figsize=mode)
     plt.subplots_adjust(left=0.07, bottom=0.1, right=0.9, top=0.88, wspace=0, hspace=0)
     compteur_pt_ok = 0
@@ -69,11 +68,11 @@ def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode):
 
 if __name__== '__main__':
     a = 45 # angle degrée rail l2
-    l1 = 38 # longueur de sortie limite l1
-    l2 = 38 # longueur de sortie limite l2
+    l1 = 38.2 # longueur de sortie limite l1
+    l2 = 38.2 # longueur de sortie limite l2
     SAVE = False
     name_file = 'zone_travail_{}_pays'.format(a)
-    pas = 10
+    pas = 1
     X = np.arange(0, 40+1, pas)
     Y = np.arange(0, 40+1, pas)
 

@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sympy import *
+import os
+import tools
 
 
 # Fonction
@@ -17,8 +19,8 @@ def calcul_rigi(a,b,c,d,e):
     X.append(d)
     Y.append(e)
 
-def graph(f):
-    fig = plt.figure(figsize=paysage)
+def graph(f,mode):
+    fig = plt.figure(figsize=mode)
     plt.subplots_adjust(left=-0.02, bottom=0, right=1, top=0.88, wspace=0, hspace=0)
     #ax = fig.add_subplot(111, projection="3d")
     ax= fig.gca(projection="3d")
@@ -51,6 +53,10 @@ def graph(f):
 
 
 # Variables
+
+SAVE = False
+name_file = 'zone_travail__pays'
+
 portrait = (7, 4)
 paysage = (9.2, 5.8)
 f = 1e6  # force en simulation en N
@@ -151,14 +157,14 @@ rappX = round(max(rigiX)/min(rigiX), 2)
 rappY = round(max(rigiY)/min(rigiY), 2)
 rappZ = round(max(rigiZ)/min(rigiZ), 2)
 
-maxmax = max(max(rigiX),max(rigiY),max(rigiZ))
-minmin = min(min(rigiX),min(rigiY),min(rigiZ))
-rappmax = round(maxmax/minmin,2)
+maxmax = max(max(rigiX), max(rigiY), max(rigiZ))
+minmin = min(min(rigiX), min(rigiY), min(rigiZ))
+rappmax = round(maxmax/minmin, 2)
 
-print(rigiX)
+# print(rigiX)
     # Graphiques
-graph(3e7)
-graph(3.2e6)
+graph(3e7, tools.PAYSAGE)
+graph(3.2e6, tools.PAYSAGE)
 
 plt.show()
     # Création de tableau
