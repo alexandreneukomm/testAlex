@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 import numpy as np
@@ -51,14 +53,19 @@ def graph(f,mode):
 
     plt.legend(loc='best')
 
+    if SAVE==True:
+        tools.save_auto(name_file)
+
+    plt.show()
+
+
+
 
 # Variables
 
-SAVE = False
-name_file = 'zone_travail__pays'
+SAVE = True
+name_file = 'rigidite_plaque_XY'
 
-portrait = (7, 4)
-paysage = (9.2, 5.8)
 f = 1e6  # force en simulation en N
 an = np.linspace(0, 2 * np.pi, 72)
 
@@ -164,9 +171,9 @@ rappmax = round(maxmax/minmin, 2)
 # print(rigiX)
     # Graphiques
 graph(3e7, tools.PAYSAGE)
+name_file = 'rigidite_plaque_XY_zoom'
 graph(3.2e6, tools.PAYSAGE)
 
-plt.show()
     # Création de tableau
     # col1="Position X (mm)"
     # col2="Position Y (mm)"

@@ -3,13 +3,14 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+import tools
 
 # Fonctions
 # AGC: Essaie d'avoir des noms les plus précis possible.
 # En effet ce n'est pas juste une fonction de graph générique, mais une fonction qui est déjà spécialisée
 def graph_avance_filetage(FZ, N, F, fzlimit, mode ="PORTRAIT"):
 
-    fig, ax = plt.subplots(figsize=get_figsize(mode))
+    fig, ax = plt.subplots(figsize=mode)
     plt.subplots_adjust()
 
     for ix, n_ix in enumerate(N):
@@ -28,17 +29,10 @@ def graph_avance_filetage(FZ, N, F, fzlimit, mode ="PORTRAIT"):
 
     plt.legend(loc='best')
 
-# AGC: Tu me diras que cette fonction prend plus de texte que ce que tu avais fait,
-# mais l'idée ce serait de déplacer ça dans un fichier tools.py que tu vas importer dans tous tes codes.
-# Comme ça tu le fais une fois et tu l'utilise partout, et là tu as un gain.
-def get_figsize(mode):
-    if "PORTRAIT" in mode:
-        return (7, 4)
-    if "PAYSAGE" in mode:
-        return (9.2, 5.8)
-    # If mode not correct, return an error
-    print("Wrong mode choosen for plot figsize! Use PORTRAIT or PAYSAGE!")
-    exit(-1000)
+    if SAVE==True:
+        tools.save_auto(name_file)
+
+    plt.show()
 
 # AGC: Bonne pratique en python: limiter pour avoir une seule entrée possible du programme (donc le main).
 # Dans ton cas précis ne pose pas de problème car tu run sur le fichier que tu utilise mais si tu veux par exemple
@@ -47,11 +41,12 @@ def get_figsize(mode):
 if __name__== '__main__':
 
     # Variables
-    mode = "PORTRAIT" # AGC: Facultatif si portrait car valeur par défaut de la fonction graph
-    FZ = np.arange(0.0, 1.5 + 0.01, 0.1) # Pas du filet [mm]
+    SAVE = False
+    name_file = 'avance_filetage'
+    FZ = np.arange(0.0, 1.5 + 0.1, 0.1) # Pas du filet [mm]
     N = np.arange(10000, 40000 + 1, 10000) # Avance [mm/min]
     #  AGC: 40000+1 car la fonction np.arange à la borne limite max "exclusive" (pas sur du terme "exclusive" :-))
-    fzlimit = 16000 # Limite d'avance de l'axe Z [mm/min]
+    fzlimit = 18000 # Limite d'avance de l'axe Z [mm/min]
     # AGC: J'ai tendance à mettre des majuscule pour indiquer un vecteur,
     # d'ailleur je crois que c'est normalisé en math non?
 
@@ -67,6 +62,4 @@ if __name__== '__main__':
     # Du coup j'ai laissé les calculs la, quite à faire deux fois la boucle.
 
     # Graphique
-    graph_avance_filetage(FZ, N, F, fzlimit, mode)
-
-    plt.show()
+    graph_avance_filetage(FZ, N, F, fzlimit, tools.PORTRAIT)

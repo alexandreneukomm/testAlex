@@ -68,13 +68,13 @@ def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode):
 
 if __name__== '__main__':
     a = 45 # angle degrée rail l2
-    l1 = 38.2 # longueur de sortie limite l1
+    l1 = 42 # longueur de sortie limite l1
     l2 = 38.2 # longueur de sortie limite l2
     SAVE = False
     name_file = 'zone_travail_{}_pays'.format(a)
     pas = 1
-    X = np.arange(0, 40+1, pas)
-    Y = np.arange(0, 40+1, pas)
+    X = np.arange(0, 42+1, pas)
+    Y = np.arange(0, 42+1, pas)
 
     result = []
     for x in  X:
