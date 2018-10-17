@@ -63,7 +63,7 @@ def graph(f,mode):
 
 # Variables
 
-SAVE = True
+SAVE = False
 name_file = 'rigidite_plaque_XY'
 
 f = 1e6  # force en simulation en N

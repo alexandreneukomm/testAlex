@@ -55,8 +55,6 @@ def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode):
                     compteur_pt_ok += 1
                 plt.scatter(signeX*res[0], signeY*res[1], c=state[0], s=size, marker= state[2])
 
-
-    #plt.legend(('Model length', 'Data length', 'Total message length'), loc='best')
     ax.set(title='Angle des rails de {}°, {} pts couverts / L1={}, L2={}'.format(a, compteur_pt_ok, l1, l2))
     plt.axis('equal')
     plt.gca().set_xlim(-40, 40)
@@ -64,15 +62,17 @@ def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode):
     if SAVE==True:
         tools.save_auto(name_file)
 
+    #print(compteur_pt_ok)
+
     plt.show()
 
 if __name__== '__main__':
-    a = 45 # angle degrée rail l2
-    l1 = 42 # longueur de sortie limite l1
-    l2 = 38.2 # longueur de sortie limite l2
+    a = 60 # angle degrée rail l2
+    l1 = 41 # longueur de sortie limite l1
+    l2 = 43 # longueur de sortie limite l2
     SAVE = False
     name_file = 'zone_travail_{}_pays'.format(a)
-    pas = 1
+    pas = 5
     X = np.arange(0, 42+1, pas)
     Y = np.arange(0, 42+1, pas)
 
