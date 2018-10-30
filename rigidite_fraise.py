@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import matplotlib.pyplot as plt
+from matplotlib import rcParams
 import numpy as np
 import pandas as pd
 from sympy import *
@@ -10,11 +11,13 @@ def pos_x(llimite):
     if llimite>9:
         posX=0
     else:
-        posX=llimite+1
+        posX=llimite+0.5
     return posX
 
 
 def graph(mode):
+    rcParams['font.family'] = 'sans-serif'
+    rcParams['font.sans-serif'] = ['DejaVu Sans']
     fig, ax = plt.subplots(figsize=mode)
     plt.subplots_adjust()
 
@@ -30,7 +33,7 @@ def graph(mode):
         'Limite de rigidité de $1 \cdot 10^{} N/m$. \n'
         'Longueur de sortie de la fraise {} mm. \n'
         'Rapport longueur / diamètre: {}'.format(expok, llimite,rapport),
-        (pos_x(llimite), (max(y1) - min(y1))/2), textcoords='data', color=color)
+        (pos_x(llimite), (max(y1) - min(y1))/2), textcoords='data', color=color, bbox=tools.boite)
 
     plt.legend(loc='best')
     if SAVE==True:
@@ -43,13 +46,13 @@ if __name__== '__main__':
     # Variables
     x = np.arange(0.0, 15.0+1, 0.1) #longueur sortie fraise en mm
     E = tools.Emd #module de Young carbure de tungstène en MPa
-    d = 1 #diamètre outil en mm
+    d = 3 #diamètre outil en mm
     F1 = 30 #force en N
     F2 = 5 #force en N
     expok = 7
     klimit = 1*10**expok
 
-    SAVE = False
+    SAVE = True
     name_file = 'flexion_fraise_{}'.format(d)
 
     #Equations

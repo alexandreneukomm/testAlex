@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import matplotlib.pyplot as plt
+from matplotlib import rcParams
 import numpy as np
 import pandas as pd
 from sympy import *
@@ -19,13 +20,15 @@ def pos_x(llimite):
 
 
 def graph(mode):
+    rcParams['font.family'] = 'sans-serif'
+    rcParams['font.sans-serif'] = ['DejaVu Sans']
     fig, ax = plt.subplots(figsize=mode)
     plt.subplots_adjust()
 
     colorbarre='tab:orange'
     colorfraise = 'tab:blue'
 
-    ax.plot(lbarre, kbarre, label="Rigidité barre laiton diamètre {} mm".format(dbarre), color=colorbarre)
+    ax.plot(lbarre, kbarre, label="Rigidité barre acier diamètre {} mm".format(dbarre), color=colorbarre)
     ax.plot(lfraise, kfraise, label="Rigidité fraise métal dur diamètre {} mm".format(dfraise), color=colorfraise)
     plt.ylim(ymax=klimit*2,ymin=klimit/5)  # adjust the top leaving bottom unchanged
     ax.set(xlabel="Longueur sortie barre/fraise (mm)", ylabel='Rigidité (N/m)', title='Rigidité limite de ${} \cdot 10^{}$ N/m barre - fraise'.format(valk, expok))
@@ -59,15 +62,15 @@ if __name__== '__main__':
     Ebarre = tools.Eacier # module de Young laiton en MPa
     Efraise= tools.Emd #module de Young carbure de tungstène en MPa
 
-    dbarre = 2.5 #diamètre barre en mm
-    dfraise = 2 #diamètre outil en mm
+    dbarre = 2.6 #diamètre barre en mm
+    dfraise = 1 #diamètre outil en mm
 
-    expok=6
-    valk=4.5
+    expok=7
+    valk=1
     klimit=valk*10**expok
 
     SAVE = False
-    name_file = 'flexion_fraise_{}'.format(dfraise)
+    name_file = 'flexion_fraise_{}_barre_{} '.format(dfraise,dbarre)
 
     #Equations
 

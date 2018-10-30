@@ -2,6 +2,7 @@
 # AGA: Bonne pratique pour forcer l'utilisation de python 3 (je crois... en tout cas je le vois tjrs en début des codes)
 
 import matplotlib.pyplot as plt
+from matplotlib import rcParams
 import numpy as np
 import tools
 
@@ -10,6 +11,8 @@ import tools
 # En effet ce n'est pas juste une fonction de graph générique, mais une fonction qui est déjà spécialisée
 def graph_avance_filetage(FZ, N, F, fzlimit, mode ="PORTRAIT"):
 
+    rcParams['font.family'] = 'sans-serif'
+    rcParams['font.sans-serif'] = ['DejaVu Sans']
     fig, ax = plt.subplots(figsize=mode)
     plt.subplots_adjust()
 
@@ -41,7 +44,7 @@ def graph_avance_filetage(FZ, N, F, fzlimit, mode ="PORTRAIT"):
 if __name__== '__main__':
 
     # Variables
-    SAVE = False
+    SAVE = True
     name_file = 'avance_filetage'
     FZ = np.arange(0.0, 1.5 + 0.1, 0.1) # Pas du filet [mm]
     N = np.arange(10000, 40000 + 1, 10000) # Avance [mm/min]

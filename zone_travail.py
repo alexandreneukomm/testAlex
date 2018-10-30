@@ -2,6 +2,7 @@
 
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
+from matplotlib import rcParams
 import numpy as np
 import pandas as pd
 import math
@@ -43,6 +44,8 @@ def get_state_from_r1_r2(R1, R2):
 
 def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode):
     size = 10
+    rcParams['font.family'] = 'sans-serif'
+    rcParams['font.sans-serif'] = ['DejaVu Sans']
     fig, ax = plt.subplots(figsize=mode)
     plt.subplots_adjust(left=0.07, bottom=0.1, right=0.9, top=0.88, wspace=0, hspace=0)
     compteur_pt_ok = 0
@@ -67,12 +70,12 @@ def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode):
     plt.show()
 
 if __name__== '__main__':
-    a = 60 # angle degrée rail l2
-    l1 = 41 # longueur de sortie limite l1
-    l2 = 43 # longueur de sortie limite l2
+    a = 45 # angle degrée rail l2
+    l1 = 35 # longueur de sortie limite l1
+    l2 = 35 # longueur de sortie limite l2
     SAVE = False
     name_file = 'zone_travail_{}_pays'.format(a)
-    pas = 5
+    pas = 1
     X = np.arange(0, 42+1, pas)
     Y = np.arange(0, 42+1, pas)
 

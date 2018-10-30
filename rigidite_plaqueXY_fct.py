@@ -2,6 +2,7 @@
 
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
+from matplotlib import rcParams
 import numpy as np
 import pandas as pd
 from sympy import *
@@ -22,6 +23,8 @@ def calcul_rigi(a,b,c,d,e):
     Y.append(e)
 
 def graph(f,mode):
+    rcParams['font.family'] = 'sans-serif'
+    rcParams['font.sans-serif'] = ['DejaVu Sans']
     fig = plt.figure(figsize=mode)
     plt.subplots_adjust(left=-0.02, bottom=0, right=1, top=0.88, wspace=0, hspace=0)
     #ax = fig.add_subplot(111, projection="3d")

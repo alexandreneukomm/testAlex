@@ -3,6 +3,7 @@
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
 import matplotlib as mpl
+from matplotlib import rcParams
 import numpy as np
 import pandas as pd
 from sympy import *
@@ -19,6 +20,8 @@ def ajout(a,b,c,d,e):
     ListeL2.append(e)
 
 def graph(mode):
+    rcParams['font.family'] = 'sans-serif'
+    rcParams['font.sans-serif'] = ['DejaVu Sans']
     fig = plt.figure(figsize=mode)
     plt.subplots_adjust(left=-0.02, bottom=0, right=1, top=0.88, wspace=0, hspace=0)
     #ax = fig.add_subplot(111, projection="3d")
@@ -284,6 +287,26 @@ if __name__== '__main__':
 
     ajout(Surface45, Surface30, Surface60, L1, L2)
 
+
+    #calcul pente deux directions
+
+    deltaXL1 = ListeL1[-1] - ListeL1[0]
+    deltaXL2 = ListeL2[-1] - ListeL2[0]
+    deltaY60 = ListeSurface60[-1] - ListeSurface60[0]
+    deltaY45 = ListeSurface45[-1]-ListeSurface45[0]
+    deltaY30 = ListeSurface30[-1]-ListeSurface30[0]
+    penteL130 = deltaY30 / deltaXL1
+    penteL230 = deltaY30 / deltaXL2
+    penteL145 = deltaY45 / deltaXL1
+    penteL245 = deltaY45 / deltaXL2
+    penteL160 = deltaY60 / deltaXL1
+    penteL260 = deltaY60 / deltaXL2
+    print(penteL130)
+    print(penteL230)
+    print(penteL145)
+    print(penteL245)
+    print(penteL160)
+    print(penteL260)
 
         # Graphiques
     graph(tools.PAYSAGE)

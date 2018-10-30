@@ -5,6 +5,7 @@ import os
 
 PORTRAIT = (7, 4)
 PAYSAGE = (9.3, 5.9)
+FULL15 = (13.9, 8)
 
 #constante mécanique
 
@@ -18,6 +19,9 @@ save_path_pdf = 'C:/Users/alexandr.neukomm/Desktop/TM-A.Neukomm/Documents/Rappor
 save_path_pgf = 'C:/Users/alexandr.neukomm/Desktop/TM-A.Neukomm/Documents/Rapport/graph'
 
 save_path_tab = 'C:/Users/alexandr.neukomm/Desktop/TM-A.Neukomm/Documents/Rapport/tab'
+
+boite = dict(boxstyle="round", fc="1")
+
 
 def save_auto(name_file):
     plt.savefig(os.path.join(save_path_pdf,name_file + '.pdf'), format='pdf')
