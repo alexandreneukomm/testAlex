@@ -10,10 +10,11 @@ FULL15 = (13.9, 8)
 #constante mécanique
 
 # module de Young divers matériaux en MPa
-Emd = 650000
-Elaiton = 110000
-Eacier = 210000
-Ealu = 70000
+MATIERE = { "acier": { "E": 210000},
+              "md": {"E": 650000},
+              "alu": {"E": 70000},
+              "laiton": {"E": 110000} }
+
 
 save_path_pdf = 'C:/Users/alexandr.neukomm/Desktop/TM-A.Neukomm/Documents/Rapport/graph/pdf'
 save_path_pgf = 'C:/Users/alexandr.neukomm/Desktop/TM-A.Neukomm/Documents/Rapport/graph'

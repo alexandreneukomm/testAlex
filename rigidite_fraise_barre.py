@@ -59,8 +59,8 @@ if __name__== '__main__':
     lbarre = np.arange(0.1, 12+0.01, 0.01) #longueur sortie fraise en mm
     lfraise = np.arange(0.1, 12+0.01, 0.01) #longueur sortie fraise en mm
 
-    Ebarre = tools.Eacier # module de Young laiton en MPa
-    Efraise= tools.Emd #module de Young carbure de tungstène en MPa
+    Ebarre = tools.MATIERE["acier"]["E"] # module de Young laiton en MPa
+    Efraise= tools.MATIERE["md"]["E"] #module de Young carbure de tungstène en MPa
 
     dbarre = 2.6 #diamètre barre en mm
     dfraise = 1 #diamètre outil en mm
