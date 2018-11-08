@@ -116,8 +116,8 @@ if __name__== '__main__':
 
     # Variables
 
-    lbarre = [0.3, 5.2] #longueur sortie fraise en mm
-    lfraise = [10.3, 3.8] #longueur sortie fraise n état en mm
+    lbarre = [0.3, 5.7] #longueur sortie fraise en mm
+    lfraise = [16.5, 4.9] #longueur sortie fraise n état en mm
 
     keys = set(tools.MATIERE.keys())
     excludes = set(["md"])
@@ -126,7 +126,7 @@ if __name__== '__main__':
         result, pointinflex = compute_trucmuch(lbarre, lfraise, tools.MATIERE[key]["E"])
 
         SAVE = True
-        name_file = 'broche_meyrat_barre_{}'.format(key)
+        name_file = 'broche_meyrat_angle_barre_{}'.format(key)
         # Graphique
         graph(tools.PORTRAIT, result, pointinflex, key)
 

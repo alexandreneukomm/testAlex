@@ -43,7 +43,7 @@ def get_state_from_r1_r2(R1, R2):
     return COLOR[index]
 
 def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode):
-    size = 10
+    size = 100
     rcParams['font.family'] = 'sans-serif'
     rcParams['font.sans-serif'] = ['DejaVu Sans']
     fig, ax = plt.subplots(figsize=mode)
@@ -70,14 +70,14 @@ def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode):
     plt.show()
 
 if __name__== '__main__':
-    a = 45 # angle degrée rail l2
-    l1 = 35 # longueur de sortie limite l1
-    l2 = 35 # longueur de sortie limite l2
-    SAVE = False
-    name_file = 'zone_travail_{}_pays'.format(a)
-    pas = 1
-    X = np.arange(0, 42+1, pas)
-    Y = np.arange(0, 42+1, pas)
+    a = 60 # angle degrée rail l2
+    l1 = 38 # longueur de sortie limite l1
+    l2 = 38 # longueur de sortie limite l2
+    SAVE = True
+    name_file = 'zone_travail_{}'.format(a)
+    pas = 4
+    X = np.arange(0, 40+1, pas)
+    Y = np.arange(0, 40+1, pas)
 
     result = []
     for x in  X:
@@ -85,7 +85,7 @@ if __name__== '__main__':
             R1, R2 = is_on_rail(x, y, a, l1, l2)
             result.append([x, y, R1, R2])
 
-    plot_result_working_area(result, a, l1, l2, tools.PAYSAGE)
+    plot_result_working_area(result, a, l1, l2, tools.PORTRAIT)
 
     # fig, ax = plt.subplots()
     # plt.subplots_adjust()

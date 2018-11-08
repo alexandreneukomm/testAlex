@@ -23,7 +23,7 @@ def graph(mode):
     rcParams['font.family'] = 'sans-serif'
     rcParams['font.sans-serif'] = ['DejaVu Sans']
     fig = plt.figure(figsize=mode)
-    plt.subplots_adjust(left=-0.02, bottom=0, right=1, top=0.88, wspace=0, hspace=0)
+    plt.subplots_adjust(left=0, bottom=0, right=0.93, top=0.96, wspace=0, hspace=0)
     #ax = fig.add_subplot(111, projection="3d")
     ax= fig.gca(projection="3d")
     ax.set(xlabel="Longueur rail L1 (mm)", ylabel="Longueur rail L2 (mm)", zlabel="Surface couverte (points)",
@@ -40,7 +40,7 @@ def graph(mode):
     fake2Dline30 = mpl.lines.Line2D([0], [0], linestyle="none", c='tab:blue', marker='o')
     fake2Dline45 = mpl.lines.Line2D([0], [0], linestyle="none", c='tab:orange', marker='o')
     fake2Dline60 = mpl.lines.Line2D([0], [0], linestyle="none", c='tab:green', marker='o')
-    ax.legend([fake2Dline30,fake2Dline45,fake2Dline60], ['Angle de 30°','Angle de 45°','Angle de 60°'], numpoints=1)
+    ax.legend([fake2Dline30,fake2Dline45,fake2Dline60], ['Angle de 30°','Angle de 45°','Angle de 60°'], numpoints=1, loc='upper left')
 
     # anotation
 
@@ -309,7 +309,7 @@ if __name__== '__main__':
     print(penteL260)
 
         # Graphiques
-    graph(tools.PAYSAGE)
+    graph(tools.PORTRAIT)
 
 
     # Création de tableau
