@@ -20,20 +20,19 @@ def pos_x(llimite):
     return posX
 
 
-def graph(mode, _result, _pointinflex, _matiere_name):
+def graphsimple(mode, _result, _pointinflex, _lfraise, _lbarre, _name_file,_matiere_name):
     rcParams['font.family'] = 'sans-serif'
     rcParams['font.sans-serif'] = ['DejaVu Sans']
     fig, ax = plt.subplots(figsize=mode)
-    plt.subplots_adjust()
+    # plt.subplots_adjust(left=0.1, bottom=0.12, right=0.97, top=0.88, wspace=0, hspace=0)
 
     colorbarre='tab:orange'
     colorfraise = 'tab:blue'
 
-
-
-    ax.plot(_result[0][0], _result[0][1], label="Longueur fraise {} mm.\nDistance canon {} mm.".format(lfraise[0], lbarre[0]), color=colorbarre)
-    ax.plot(_result[1][0], _result[1][1], label="Longueur fraise {} mm.\nDistance canon {} mm.".format(lfraise[1], lbarre[1]), color=colorfraise)
-    plt.xlim(0.1,7+0.1)  # adjust the top leaving bottom unchanged
+    ax.plot(_result[0][0], _result[0][1], label="Longueur fraise {} mm.\nDistance canon {} mm.".format(_lfraise[0], _lbarre[0]), color=colorbarre)
+    ax.plot(_result[1][0], _result[1][1], label="Longueur fraise {} mm.\nDistance canon {} mm.".format(_lfraise[1], _lbarre[1]), color=colorfraise)
+    plt.xlim(0.1, 7+0.1)  # adjust the top leaving bottom unchanged
+    plt.ylim(0e5, 2.9e7)
     ax.set(xlabel="Diamètre barre (mm)", ylabel='Rigidité (N/m)', title='Rigidité fraise vs barre {}'.format(_matiere_name))
     plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
     plt.grid()
@@ -44,20 +43,21 @@ def graph(mode, _result, _pointinflex, _matiere_name):
         connectionstyle="angle,angleA=0,angleB=90,rad=10")
     arrowprops45 = dict(
         arrowstyle="->",
-        connectionstyle="angle,angleA=0,angleB=-60,rad=10")
+        connectionstyle="angle,angleA=0,angleB=-60,rad=1")
 
     xbas = max(_result[0][0])
     ybas = max(_result[0][1])
-    offset = 60
-    ax.annotate('point changement :\n(%.1f mm; %.1e N/m)' % (xbas, ybas),
-                (xbas, ybas), xytext=(2 * offset, offset), textcoords='offset points',
+
+    offset = 7
+    ax.annotate('point changement :\n%.1f mm; %.1e N/m' % (xbas, ybas),
+                (xbas, ybas), xytext=(-9 * offset, 8*offset), textcoords='offset points',
                 bbox=bbox, arrowprops=arrowprops90)
 
     xhaut =_pointinflex[0][0]
     yhaut =_pointinflex[1][0]
-    offset = 1
-    ax.annotate('point changement :\n(%.1f mm; %.1e N/m)' % (xhaut, yhaut),
-                (xhaut, yhaut), xytext=(-10*offset, -100*offset), textcoords='offset points',
+    offset = 3
+    ax.annotate('point changement :\n%.1f mm; %.1e N/m' % (xhaut, yhaut),
+                (xhaut, yhaut), xytext=(6*offset, -10*offset), textcoords='offset points',
                 bbox=bbox, arrowprops=arrowprops45)
 
     #Point intersection
@@ -74,9 +74,46 @@ def graph(mode, _result, _pointinflex, _matiere_name):
 
     plt.legend(loc='best')
     if SAVE==True:
-        tools.save_auto(name_file)
+        tools.save_auto(_name_file)
+        # plt.show()
+        plt.close()
+    else:
+        plt.show()
 
-    plt.show()
+def graphcumuler(mode, _result1, _result2, _result3, _matiere_name):
+    rcParams['font.family'] = 'sans-serif'
+    rcParams['font.sans-serif'] = ['DejaVu Sans']
+    fig, ax = plt.subplots(figsize=mode)
+    # plt.subplots_adjust(left=0.1, bottom=0.12, right=0.97, top=0.88, wspace=0, hspace=0)
+
+    colordentiste='tab:green'
+    colormeyratmhf = 'tab:blue'
+    colormeyratangle = 'tab:red'
+
+    ax.plot(_result2[0][0], _result2[0][1],label="Broche dentaire", color=colordentiste)
+    ax.plot(_result2[1][0], _result2[1][1], color=colordentiste)
+
+
+    ax.plot(_result3[0][0], _result3[0][1], label="Broche Meyrat MHF 20", color=colormeyratmhf)
+    ax.plot(_result3[1][0], _result3[1][1], color=colormeyratmhf)
+
+    ax.plot(_result1[0][0], _result1[0][1], label="Broche Meyrat renvoi angle", color=colormeyratangle)
+    ax.plot(_result1[1][0], _result1[1][1], color=colormeyratangle)
+
+
+    plt.xlim(0.1, 7+0.1)  # adjust the top leaving bottom unchanged
+    plt.ylim(0e5, 2.9e7)
+    ax.set(xlabel="Diamètre barre (mm)", ylabel='Rigidité (N/m)', title='Comparaison diverses broches {}'.format(_matiere_name))
+    plt.ticklabel_format(style='sci', axis='y', scilimits=(0, 0))
+    plt.grid()
+
+    plt.legend(loc='best')
+    if SAVE==True:
+        tools.save_auto(name_file_cumuler)
+        # plt.show()
+        plt.close()
+    else:
+        plt.show()
 
 
 def compute_trucmuch(_lbarre, _lfraise, _Ebarre, _Efraise = tools.MATIERE["md"]["E"]):
@@ -116,19 +153,38 @@ if __name__== '__main__':
 
     # Variables
 
-    lbarre = [0.3, 5.7] #longueur sortie fraise en mm
-    lfraise = [16.5, 4.9] #longueur sortie fraise n état en mm
+    # #meyrat angle
+    lbarre1 = [0.3, 5.7] #longueur sortie fraise en mm
+    lfraise1 = [16.5, 4.9] #longueur sortie fraise n état en mm
+
+    #dentiste
+    lbarre2 = [0.3, 4.2] #longueur sortie fraise en mm
+    lfraise2 = [10.3, 3.8] #longueur sortie fraise n état en mm
+
+    #meyrat MHF 20
+    lbarre3 = [0.3, 5.2] #longueur sortie fraise en mm
+    lfraise3 = [10.3, 3.8] #longueur sortie fraise n état en mm
 
     keys = set(tools.MATIERE.keys())
     excludes = set(["md"])
 
     for key in keys.difference(excludes):
-        result, pointinflex = compute_trucmuch(lbarre, lfraise, tools.MATIERE[key]["E"])
+        result1, pointinflex1 = compute_trucmuch(lbarre1, lfraise1, tools.MATIERE[key]["E"])
+        result2, pointinflex2 = compute_trucmuch(lbarre2, lfraise2, tools.MATIERE[key]["E"])
+        result3, pointinflex3 = compute_trucmuch(lbarre3, lfraise3, tools.MATIERE[key]["E"])
 
         SAVE = True
-        name_file = 'broche_meyrat_angle_barre_{}'.format(key)
+        name_file1 = 'broche_meyrat_angle_barre_{}'.format(key)
+        name_file2 = 'broche_dentiste_barre_{}'.format(key)
+        name_file3 = 'broche_meyrat_barre_{}'.format(key)
+        name_file_cumuler = 'broches_cumuler_{}'.format(key)
         # Graphique
-        graph(tools.PORTRAIT, result, pointinflex, key)
+
+        graphsimple(tools.PORTRAIT, result1, pointinflex1, lfraise1, lbarre1, name_file1, key)
+        graphsimple(tools.PORTRAIT, result2, pointinflex2, lfraise2, lbarre2, name_file2, key)
+        graphsimple(tools.PORTRAIT, result3, pointinflex3, lfraise3, lbarre3, name_file3, key)
+
+        graphcumuler(tools.PORTRAIT, result1, result2, result3, key)
 
 
     #Tableau
