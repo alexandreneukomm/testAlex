@@ -19,7 +19,7 @@ def ajout(a,b,c,d,e):
     ListeL1.append(d)
     ListeL2.append(e)
 
-def graph(mode):
+def graph(mode=tools.PORTRAIT):
     rcParams['font.family'] = 'sans-serif'
     rcParams['font.sans-serif'] = ['DejaVu Sans']
     fig = plt.figure(figsize=mode)

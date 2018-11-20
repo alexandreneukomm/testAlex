@@ -9,7 +9,7 @@ import tools
 # Fonctions
 # AGC: Essaie d'avoir des noms les plus précis possible.
 # En effet ce n'est pas juste une fonction de graph générique, mais une fonction qui est déjà spécialisée
-def graph_avance_filetage(FZ, N, F, fzlimit, mode ="PORTRAIT"):
+def graph_avance_filetage(FZ, N, F, fzlimit, mode=tools.PORTRAIT):
 
     rcParams['font.family'] = 'sans-serif'
     rcParams['font.sans-serif'] = ['DejaVu Sans']

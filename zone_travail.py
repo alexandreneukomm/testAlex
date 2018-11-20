@@ -42,7 +42,7 @@ def get_state_from_r1_r2(R1, R2):
 
     return COLOR[index]
 
-def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode):
+def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode=tools.PORTRAIT):
     size = 100
     rcParams['font.family'] = 'sans-serif'
     rcParams['font.sans-serif'] = ['DejaVu Sans']
@@ -71,13 +71,14 @@ def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode):
 
 if __name__== '__main__':
     a = 60 # angle degrée rail l2
-    l1 = 38 # longueur de sortie limite l1
-    l2 = 38 # longueur de sortie limite l2
-    SAVE = True
+    l1 = 76/2 # longueur de sortie limite l1, demi course du rail
+    l2 = l1 # longueur de sortie limite l2, demi course du rail
+
+    SAVE = False
     name_file = 'zone_travail_{}'.format(a)
     pas = 4
-    X = np.arange(0, 40+1, pas)
-    Y = np.arange(0, 40+1, pas)
+    X = np.arange(0, l1+1, pas)
+    Y = np.arange(0, l1+1, pas)
 
     result = []
     for x in  X:
@@ -86,6 +87,7 @@ if __name__== '__main__':
             result.append([x, y, R1, R2])
 
     plot_result_working_area(result, a, l1, l2, tools.PORTRAIT)
+
 
     # fig, ax = plt.subplots()
     # plt.subplots_adjust()

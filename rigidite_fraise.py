@@ -15,7 +15,7 @@ def pos_x(llimite):
     return posX
 
 
-def graph(mode):
+def graph(mode=tools.PORTRAIT):
     rcParams['font.family'] = 'sans-serif'
     rcParams['font.sans-serif'] = ['DejaVu Sans']
     fig, ax = plt.subplots(figsize=mode)
@@ -52,7 +52,7 @@ if __name__== '__main__':
     expok = 7
     klimit = 1*10**expok
 
-    SAVE = True
+    SAVE = False
     name_file = 'flexion_fraise_{}'.format(d)
 
     #Equations
