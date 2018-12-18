@@ -43,15 +43,15 @@ def get_state_from_r1_r2(R1, R2):
     return COLOR[index]
 
 def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode=tools.PORTRAIT):
-    size = 100
+    size = 10
     rcParams['font.family'] = 'sans-serif'
     rcParams['font.sans-serif'] = ['DejaVu Sans']
     fig, ax = plt.subplots(figsize=mode)
     plt.subplots_adjust(left=0.07, bottom=0.1, right=0.9, top=0.88, wspace=0, hspace=0)
     compteur_pt_ok = 0
 
-    for signeX in [-1,1]:
-        for signeY in [-1,1]:
+    for signeX in [-1, 1]:
+        for signeY in [-1, 1]:
             for res in result_wa:
                 state = get_state_from_r1_r2(res[2], res[3])
                 if state[1] is COLOR[-1][1]:
@@ -70,13 +70,13 @@ def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode=tools.PORTRAIT):
     plt.show()
 
 if __name__== '__main__':
-    a = 60 # angle degrée rail l2
+    a = 30 # angle degrée rail l2
     l1 = 76/2 # longueur de sortie limite l1, demi course du rail
     l2 = l1 # longueur de sortie limite l2, demi course du rail
 
     SAVE = False
-    name_file = 'zone_travail_{}'.format(a)
-    pas = 4
+    name_file = 'zone_travail_{}_pays'.format(a)
+    pas = 1
     X = np.arange(0, l1+1, pas)
     Y = np.arange(0, l1+1, pas)
 
@@ -86,7 +86,7 @@ if __name__== '__main__':
             R1, R2 = is_on_rail(x, y, a, l1, l2)
             result.append([x, y, R1, R2])
 
-    plot_result_working_area(result, a, l1, l2, tools.PORTRAIT)
+    plot_result_working_area(result, a, l1, l2, tools.PAYSAGE)
 
 
     # fig, ax = plt.subplots()

@@ -46,11 +46,11 @@ if __name__== '__main__':
     # Variables
     x = np.arange(0.0, 15.0+1, 0.1) #longueur sortie fraise en mm
     E = tools.MATIERE["md"]["E"] #module de Young carbure de tungstène en MPa
-    d = 3 #diamètre outil en mm
+    d = 5 #diamètre outil en mm
     F1 = 30 #force en N
     F2 = 5 #force en N
-    expok = 7
-    klimit = 1*10**expok
+    expok = 6
+    klimit = 2.6*10**expok
 
     SAVE = False
     name_file = 'flexion_fraise_{}'.format(d)
