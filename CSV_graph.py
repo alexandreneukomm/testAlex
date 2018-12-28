@@ -128,12 +128,11 @@ if __name__ == "__main__":
     data_graphVide = zero_time(data_graphVide)
 
 
-    #Plot_data(data_graph, "Time [ms]", [courant_moteur, courant_moteurB],"Erreur de poursuite")
-    Plot_data_2_axis(data_graph3600, "Time [ms]", erreur_regle, courant_moteur, "Mon titre", tools.PAYSAGE)
+    # Plot_data(data_graph3600, "Time [ms]", [courant_moteur, courant_moteurB],"Erreur de poursuite")
+    Plot_data_2_axis(data_graph3600, "Time [ms]", erreur_regle, courant_moteur, "3600", tools.PAYSAGE)
     Plot_data_2_axis(data_graph7200, "Time [ms]", erreur_regle, courant_moteur, "7200", tools.PAYSAGE)
     Plot_data_2_axis(data_graphVide, "Time [ms]", erreur_regle, courant_moteur, "Vide", tools.PAYSAGE)
-    #Plot_data(data_graph, "Time [ms]", ["ActualCurrentQ"],"Ccoco")
-    #Plot_data(data_graph, "Time [ms]", ["ActualCurrentD","ActualCurrentQ"])
+    # Plot_data(data_graph, "Time [ms]", ["ActualCurrentQ"],"Ccoco")
 
     plt.show()
 

@@ -11,13 +11,12 @@ import tools
 # En effet ce n'est pas juste une fonction de graph générique, mais une fonction qui est déjà spécialisée
 def graph_avance_filetage(FZ, N, F, fzlimit, mode=tools.PORTRAIT):
 
-    rcParams['font.family'] = 'sans-serif'
-    rcParams['font.sans-serif'] = ['DejaVu Sans']
+    tools.GRAPH_LATEX
     fig, ax = plt.subplots(figsize=mode)
     plt.subplots_adjust()
 
     for ix, n_ix in enumerate(N):
-        ax.plot(FZ, F[ix], label="Vitesse de rotation de {} tr/min".format(n_ix))
+        ax.plot(FZ, F[ix], label="Vitesse de rotation de {} tr/min      ".format(n_ix))
 
     ax.set(xlabel="Pas de filetage (mm)", ylabel='Avance de l\'axe Z (mm/min)',
         title='Vitesse d\'avance de l\'axe Z fonction du pas de filetage')
@@ -28,7 +27,7 @@ def graph_avance_filetage(FZ, N, F, fzlimit, mode=tools.PORTRAIT):
     # Draw a default vline at x=... that spans the yrange
     color = 'tab:brown'
     plt.axhline(y=fzlimit, color=color)
-    ax.annotate('Limite d\'avance de l\'axe Z {} (mm/min)'.format(fzlimit), (0, fzlimit + 2500), textcoords='data', color=color, bbox=dict(boxstyle="round", fc="w"))
+    ax.annotate('Limite d\'avance de l\'axe Z {} (mm/min)'.format(fzlimit), (0, fzlimit + 2500), textcoords='data', color=color,bbox=tools.boite, ha='left')
 
     plt.legend(loc='best')
 

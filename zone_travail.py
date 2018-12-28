@@ -42,10 +42,9 @@ def get_state_from_r1_r2(R1, R2):
 
     return COLOR[index]
 
-def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode=tools.PORTRAIT):
+def plot_result_working_area(result_wa, a ,l1 ,l2 ,_name_file ,mode=tools.PORTRAIT):
     size = 10
-    rcParams['font.family'] = 'sans-serif'
-    rcParams['font.sans-serif'] = ['DejaVu Sans']
+    tools.GRAPH_LATEX
     fig, ax = plt.subplots(figsize=mode)
     plt.subplots_adjust(left=0.07, bottom=0.1, right=0.9, top=0.88, wspace=0, hspace=0)
     compteur_pt_ok = 0
@@ -63,35 +62,47 @@ def plot_result_working_area(result_wa, a ,l1 ,l2 ,mode=tools.PORTRAIT):
     plt.gca().set_xlim(-40, 40)
 
     if SAVE==True:
-        tools.save_auto(name_file)
-
-    #print(compteur_pt_ok)
-
-    plt.show()
+        tools.save_auto(_name_file)
+        # plt.show()
+        plt.close()
+    else:
+        plt.show()
 
 if __name__== '__main__':
-    a = 30 # angle degrée rail l2
+
+    a60 = 60 # angle degrée rail l2
+    a45 = 45  # angle degrée rail l2
+    a30 = 30  # angle degrée rail l2
+
     l1 = 76/2 # longueur de sortie limite l1, demi course du rail
     l2 = l1 # longueur de sortie limite l2, demi course du rail
 
-    SAVE = False
-    name_file = 'zone_travail_{}_pays'.format(a)
+    SAVE = True
+    name_file60 = 'zone_travail_{}_pays'.format(a60)
+    name_file45 = 'zone_travail_{}_pays'.format(a45)
+    name_file30 = 'zone_travail_{}_pays'.format(a30)
     pas = 1
     X = np.arange(0, l1+1, pas)
     Y = np.arange(0, l1+1, pas)
 
-    result = []
+    result60 = []
+    result45 = []
+    result30 = []
     for x in  X:
         for y in Y:
-            R1, R2 = is_on_rail(x, y, a, l1, l2)
-            result.append([x, y, R1, R2])
+            R1, R2 = is_on_rail(x, y, a60, l1, l2)
+            result60.append([x, y, R1, R2])
 
-    plot_result_working_area(result, a, l1, l2, tools.PAYSAGE)
+    for x in  X:
+        for y in Y:
+            R1, R2 = is_on_rail(x, y, a45, l1, l2)
+            result45.append([x, y, R1, R2])
 
+    for x in  X:
+        for y in Y:
+            R1, R2 = is_on_rail(x, y, a30, l1, l2)
+            result30.append([x, y, R1, R2])
 
-    # fig, ax = plt.subplots()
-    # plt.subplots_adjust()
-    # plt.plot(X, Y)
-    # ax.set(title='Angle des rails de {}°'.format(a))
-    # plt.axis('equal')
-    # plt.show()
+    plot_result_working_area(result60, a60, l1, l2, name_file60, tools.PAYSAGE)
+    plot_result_working_area(result45, a45, l1, l2, name_file45, tools.PAYSAGE)
+    plot_result_working_area(result30, a30, l1, l2, name_file30, tools.PAYSAGE)

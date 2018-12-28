@@ -57,7 +57,7 @@ def graphsimple(mode, _result, _pointinflex, _lfraise, _lbarre, _name_file,_mati
     yhaut =_pointinflex[1][0]
     offset = 3
     ax.annotate('point changement :\n%.1f mm; %.1e N/m' % (xhaut, yhaut),
-                (xhaut, yhaut), xytext=(6*offset, -10*offset), textcoords='offset points',
+                (xhaut, yhaut), xytext=(6*offset, -20*offset), textcoords='offset points',
                 bbox=bbox, arrowprops=arrowprops45)
 
     #Point intersection
@@ -81,8 +81,7 @@ def graphsimple(mode, _result, _pointinflex, _lfraise, _lbarre, _name_file,_mati
         plt.show()
 
 def graphcumuler(mode, _result1, _result2, _result3, _matiere_name):
-    rcParams['font.family'] = 'sans-serif'
-    rcParams['font.sans-serif'] = ['DejaVu Sans']
+    tools.GRAPH_LATEX
     fig, ax = plt.subplots(figsize=mode)
     # plt.subplots_adjust(left=0.1, bottom=0.12, right=0.97, top=0.88, wspace=0, hspace=0)
 
@@ -153,7 +152,7 @@ if __name__== '__main__':
 
     # Variables
 
-    # #meyrat angle
+    #meyrat angle
     lbarre1 = [0.3, 5.7] #longueur sortie fraise en mm
     lfraise1 = [16.5, 4.9] #longueur sortie fraise n état en mm
 

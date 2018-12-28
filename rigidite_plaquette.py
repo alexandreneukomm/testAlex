@@ -57,7 +57,7 @@ if __name__== '__main__':
     expok=7
     klimit=1*10**expok
 
-    SAVE = True
+    SAVE = False
     name_file = 'flexion_plaquette'
 
     #Equations

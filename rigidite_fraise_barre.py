@@ -20,8 +20,7 @@ def pos_x(llimite):
 
 
 def graph(mode):
-    rcParams['font.family'] = 'sans-serif'
-    rcParams['font.sans-serif'] = ['DejaVu Sans']
+    tools.GRAPH_LATEX
     fig, ax = plt.subplots(figsize=mode)
     plt.subplots_adjust()
 
