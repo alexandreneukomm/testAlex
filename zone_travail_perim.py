@@ -22,10 +22,9 @@ def perim(_l1,_a):
 
 def graph(_result60, _result45, _result30, _l1, mode=tools.PORTRAIT):
 
-    rcParams['font.family'] = 'sans-serif'
-    rcParams['font.sans-serif'] = ['DejaVu Sans']
+    tools.GRAPH_LATEX
     fig, ax = plt.subplots(figsize=mode)
-    plt.subplots_adjust()
+    plt.subplots_adjust(bottom=0.12)
 
     pente60 = round((_result60[0][3]-_result60[0][2])/(_l1[3] - _l1[2]),1)
     pente45 = round((_result45[0][3] - _result45[0][2]) / (_l1[3] - _l1[2]),1)
@@ -64,7 +63,7 @@ if __name__== '__main__':
 
     l1 = np.arange(30, 40+1, 1) # longueur de sortie limite l1, demi course du rail
     l2 = l1 # longueur de sortie limite l2, demi course du rail
-    SAVE = False
+    SAVE = True
     name_file = 'perim'
 
     result60 = []

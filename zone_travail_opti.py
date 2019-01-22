@@ -20,8 +20,7 @@ def ajout(a,b,c,d,e):
     ListeL2.append(e)
 
 def graph(mode=tools.PORTRAIT):
-    rcParams['font.family'] = 'sans-serif'
-    rcParams['font.sans-serif'] = ['DejaVu Sans']
+    tools.GRAPH_LATEX
     fig = plt.figure(figsize=mode)
     plt.subplots_adjust(left=0, bottom=0, right=0.93, top=0.96, wspace=0, hspace=0)
     #ax = fig.add_subplot(111, projection="3d")

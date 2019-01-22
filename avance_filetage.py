@@ -13,7 +13,7 @@ def graph_avance_filetage(FZ, N, F, fzlimit, mode=tools.PORTRAIT):
 
     tools.GRAPH_LATEX
     fig, ax = plt.subplots(figsize=mode)
-    plt.subplots_adjust()
+    plt.subplots_adjust(bottom=0.12)
 
     for ix, n_ix in enumerate(N):
         ax.plot(FZ, F[ix], label="Vitesse de rotation de {} tr/min      ".format(n_ix))

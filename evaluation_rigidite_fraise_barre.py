@@ -172,7 +172,7 @@ if __name__== '__main__':
         result2, pointinflex2 = compute_trucmuch(lbarre2, lfraise2, tools.MATIERE[key]["E"])
         result3, pointinflex3 = compute_trucmuch(lbarre3, lfraise3, tools.MATIERE[key]["E"])
 
-        SAVE = True
+        SAVE = False
         name_file1 = 'broche_meyrat_angle_barre_{}'.format(key)
         name_file2 = 'broche_dentiste_barre_{}'.format(key)
         name_file3 = 'broche_meyrat_barre_{}'.format(key)
