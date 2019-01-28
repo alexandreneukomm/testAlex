@@ -48,10 +48,10 @@ def graph(f,mode):
     # plt.gca().set_zlim(0, f)
 
     # anotation
-    ax.text(-10, -15, 0, "Zone de travail simplifiée", color='k')
+    ax.text(-10, -10, 0, "Zone de travail", color='k')
 
     # cercle de la course course
-    plt.plot(27 * np.cos(an), 27 * np.sin(an), c="k", marker='.', linestyle=':')
+    plt.plot(courseX, courseY, c="k", marker='.', linestyle=':')
 
     plt.legend(loc='best')
 
@@ -70,6 +70,8 @@ if __name__ == "__main__":
 
     f = 1e6  # force en simulation en N
     an = np.linspace(0, 2 * np.pi, 72)
+    courseX = [0,-26.87,-26.87,0,26.87,26.87,0]
+    courseY = [-38, -11.13, 11.13, 38, 11.13, -11.13,-38]
 
         # Liste vide
     X = []
@@ -78,89 +80,70 @@ if __name__ == "__main__":
     rigiY = []
     rigiZ = []
 
-        # Simulation 1 a X0 Y-27
-    posX = 0
-    posY = -27
-    deplaX = 5.1e-5
-    deplaY = 5.2e-5
-    deplaZ = 1e-3
+        # OK
+    posX = courseX[0]
+    posY = courseY[0]
+    deplaX = 3.025e-5
+    deplaY = 2.645e-5
+    deplaZ = 3.351e-4
 
     calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
 
-        # Simulation 2 a X19 Y-19
-    posX = 19.1
-    posY = -19.1
-    deplaX = 4.8e-5
-    deplaY = 5.4e-5
-    deplaZ = 9.6e-4
+    # OK
+    posX = courseX[1]
+    posY = courseY[1]
+    deplaX = 5.42e-5
+    deplaY = 3.577e-5
+    deplaZ = 1.59e-4
 
     calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
 
+    posX = courseX[2]
+    posY = courseY[2]
+    deplaX = 8.812e-5
+    deplaY = 3.577e-5
+    deplaZ = 7.515e-5
 
-        # Simulation 3 a X27 Y0
-    posX = 27
-    posY = 0
-    deplaX = 4.2e-5
-    deplaY = 5.5e-5
-    deplaZ = 6.3e-4
+    print(deplaZ)
+
+    calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
+    # OK
+    posX = courseX[3]
+    posY = courseY[3]
+    deplaX = 1.46e-4
+    deplaY = 2.645e-5
+    deplaZ = 4.489e-5
 
     calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
 
-        # Simulation 4 a X19 Y-19
-    posX = 19.1
-    posY = 19.1
-    deplaX = 3.9e-5
-    deplaY = 5.4e-5
-    deplaZ = 3.9e-4
+    posX = courseX[4]
+    posY = courseY[4]
+    deplaX = 8.812e-5
+    deplaY = 3.577e-5
+    deplaZ = 7.515e-5
+
 
     calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
 
-        # Simulation 5 a X0 Y27
-    posX = 0
-    posY = 27
-    deplaX = 3.8e-5
-    deplaY = 5.2e-5
-    deplaZ = 3.2e-4
+        # OK
+    posX = courseX[5]
+    posY = courseY[5]
+    deplaX = 5.42e-5
+    deplaY = 3.577e-5
+    deplaZ = 1.59e-4
 
     calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
 
-        # Simulation 6 a X19 Y-19
-    posX = -19.1
-    posY = 19.1
-    deplaX = 3.9e-5
-    deplaY = 5.4e-5
-    deplaZ = 3.9e-4
+        # OK
+    posX = courseX[6]
+    posY = courseY[6]
+    deplaX = 3.025e-5
+    deplaY = 2.645e-5
+    deplaZ = 3.351e-4
 
     calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
 
-        # Simulation 3 a X27 Y0
-    posX = -27
-    posY = 0
-    deplaX = 4.2e-5
-    deplaY = 5.5e-5
-    deplaZ = 6.3e-4
-
-    calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
-
-        # Simulation 2 a X19 Y-19
-    posX = -19.1
-    posY = -19.1
-    deplaX = 4.8e-5
-    deplaY = 5.4e-5
-    deplaZ = 9.6e-4
-
-    calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
-
-        # Simulation 1 a X0 Y-27
-    posX = 0
-    posY = -27
-    deplaX = 5.1e-5
-    deplaY = 5.2e-5
-    deplaZ = 1e-3
-
-    calcul_rigi(deplaX, deplaY, deplaZ, posX, posY)
-
-        # calculs rigi
+    # calculs rigi
 
     xmax=max(rigiX)
     xmin=min(rigiX)
@@ -193,7 +176,7 @@ if __name__ == "__main__":
 
 
         # Graphiques
-    graph(3e7, tools.PAYSAGE)
+    graph(3e13, tools.PAYSAGE)
     name_file = 'rigidite_plaque_XY_zoom'
     graph(3.2e6, tools.PAYSAGE)
 
