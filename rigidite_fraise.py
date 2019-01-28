@@ -14,26 +14,29 @@ def pos_x(llimite):
         posX=llimite+0.5
     return posX
 
+def moment_quadra_cylindre(_diametre):
+    result = ((np.pi * _diametre ** 4) / 64)
+    return result
+
+
 
 def graph(mode=tools.PORTRAIT):
     tools.GRAPH_LATEX
     fig, ax = plt.subplots(figsize=mode)
-    plt.subplots_adjust()
+    plt.subplots_adjust(left=0.14, bottom=0.13, right=0.95)
 
-    ax.plot(x, y1, label="Force de {} N".format(F1))
-    ax.plot(x, y2, label="Force de {} N".format(F2))
-    ax.set(xlabel="Longueur sortie outil (mm)", ylabel='Déflexion (mm)', title='Flexion outil diamètre {} mm'.format(d))
-    plt.xlim(0, 12)
+    ax.plot(lbarre, k1, label="Ø {} mm".format(dfraise1))
+    ax.plot(lbarre, k2, label="Ø {} mm".format(dfraise2))
+    ax.plot(lbarre, k3, label="Ø {} mm".format(dfraise3))
+    ax.set(xlabel="Longueur sortie outil (mm)", ylabel='Rigidité (N/m)', title='Rigidité outils axiaux fonction de la longueur de sortie')
+    plt.ylim(klimite-3000000, klimite+10000000)
+    plt.xlim(0, 10)
 
     plt.grid()
-    # Draw a default vline at x=... that spans the yrange
     color = 'tab:red'
-    plt.axvline(x=llimite, color=color)
-    ax.annotate(
-        'Limite de rigidité de ${} \cdot 10^{} N/m$. \n'
-        'Longueur de sortie de la fraise {} mm. \n'
-        'Rapport longueur / diamètre: {}'.format(valk, expok, llimite,rapport),
-        (0.5, (max(y1) - min(y1))/2), textcoords='data', color=color, bbox=tools.boite)
+    plt.axhline(y=klimite, color=color)
+    ax.annotate('Limite longueur: \n{} mm\n{} mm\n{} mm'
+                .format(round(llimitefraise1, 2),round(llimitefraise2, 2),round(llimitefraise3, 2)), (0.5, klimite*1.6), textcoords='data', bbox=tools.boite)
 
     plt.legend(loc='best')
     if SAVE==True:
@@ -44,30 +47,33 @@ def graph(mode=tools.PORTRAIT):
 if __name__== '__main__':
 
     # Variables
-    x = np.arange(0.0, 15.0+1, 0.1) #longueur sortie fraise en mm
-    E = tools.MATIERE["md"]["E"] #module de Young carbure de tungstène en MPa
-    d = 3 #diamètre outil en mm
-    F1 = 30 #force en N
-    F2 = 5 #force en N
+
+    dfraise1 = 1  # diamètre fraise en mm
+    dfraise2 = 2  # diamètre fraise en mm
+    dfraise3 = 3  # diamètre fraise en mm
+    lbarre = np.arange(0.01, 12+0.01, 0.1)
+    Efraise = tools.MATIERE["md"]["E"]  # module de Young md en MPa
     expok = 7
     valk = 1
-    klimit = valk*10**expok
+    klimite = valk*10**expok
 
 
-    SAVE = True
-    name_file = 'flexion_fraise_{}'.format(d)
+    SAVE = False
+    name_file = 'rigi_fraise'
 
-    #Equations
-    I= (np.pi*d**4)/64
-    y1=(F1*x**3)/(3*E*I)
-    y2=(F2*x**3)/(3*E*I)
-    llimite=round(((3*E*10**6*I/10**12)/(klimit))**(1/3)*1000,2)
-    rapport=round(llimite/d,2)
+    # Equation
 
+    Ifraise1= moment_quadra_cylindre(dfraise1)
+    Ifraise2 = moment_quadra_cylindre(dfraise2)
+    Ifraise3 = moment_quadra_cylindre(dfraise3)
+
+    k1 = (((3 * Efraise * Ifraise1) / (lbarre ** 3)* 1000) )
+    k2 = (((3 * Efraise * Ifraise2) / (lbarre ** 3) * 1000))
+    k3 = (((3 * Efraise * Ifraise3) / (lbarre ** 3) * 1000))
+
+    llimitefraise1 = ((3 * Efraise * Ifraise1 * 1000) / (klimite)) ** (1 / 3)
+    llimitefraise2 = ((3 * Efraise * Ifraise2 * 1000) / (klimite)) ** (1 / 3)
+    llimitefraise3 = ((3 * Efraise * Ifraise3 * 1000) / (klimite)) ** (1 / 3)
     #Graphique
 
     graph(tools.PORTRAIT)
-
-    #Tableau
-
-    print('coco')

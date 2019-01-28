@@ -13,9 +13,9 @@ import tools
 # Fonction
 
 def calcul_rigi(a,b,c,d,e):
-    Xrigi = f / (a* 1000)
-    Yrigi = f / (b * 1000)
-    Zrigi = f / (c * 1000)
+    Xrigi = f / (a / 1000)
+    Yrigi = f / (b / 1000)
+    Zrigi = f / (c / 1000)
     rigiX.append(Xrigi)
     rigiY.append(Yrigi)
     rigiZ.append(Zrigi)
@@ -45,7 +45,7 @@ def graph(f,mode):
         ax.plot(X, Y, rigiZ, c="g")
         ax.text2D(0.1, 0.8, "Rigidité max {} N/m \nRigidité min {} N/m \nRapport rigidité max/min: \nZ {}".format(zmax,zmin,rappZ), transform=ax.transAxes)
 
-    plt.gca().set_zlim(0, f)
+    # plt.gca().set_zlim(0, f)
 
     # anotation
     ax.text(-10, -15, 0, "Zone de travail simplifiée", color='k')
@@ -189,10 +189,9 @@ if __name__ == "__main__":
     maxmax = ("%10.1e" % (maxmax))
     minmin = ("%10.1e" % (minmin))
 
-    formattedList = ["%10.1e" % member for member in rigiZ]
+    # formattedList = ["%10.1e" % member for member in rigiZ]
 
 
-    # print(rigiX)
         # Graphiques
     graph(3e7, tools.PAYSAGE)
     name_file = 'rigidite_plaque_XY_zoom'

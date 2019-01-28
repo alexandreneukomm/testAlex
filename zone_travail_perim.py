@@ -61,9 +61,10 @@ if __name__== '__main__':
     a45 = 45  # angle degrée rail l2
     a30 = 30  # angle degrée rail l2
 
-    l1 = np.arange(30, 40+1, 1) # longueur de sortie limite l1, demi course du rail
+    # l1 = np.arange(30, 40+1, 1) # longueur de sortie limite l1, demi course du rail
+    l1=38
     l2 = l1 # longueur de sortie limite l2, demi course du rail
-    SAVE = True
+    SAVE = False
     name_file = 'perim'
 
     result60 = []
@@ -75,9 +76,11 @@ if __name__== '__main__':
     permietre = perim(l1, a45)
     result45.append(permietre)
 
+    print(result45)
+
     result30 = []
     # for y in l1:
     permietre = perim(l1, a30)
     result30.append(permietre)
 
-    graph(result60, result45, result30, l1)
+    # graph(result60, result45, result30, l1)

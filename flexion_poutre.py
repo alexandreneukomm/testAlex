@@ -7,8 +7,8 @@ import pandas as pd
 from sympy import *
 import tools
 
-def moment_quadra(d):
-    result = ((np.pi * d ** 4) / 64)
+def moment_quadra_cylindre(_diametre):
+    result = ((np.pi * _diametre ** 4) / 64)
     return result
 
 
@@ -16,10 +16,10 @@ if __name__== '__main__':
 
     # Variables
 
-    dbarre = 5  # diamètre barre en mm
-    lbarre = np.arange(0.1, 5+0.01, 1)
+    dbarre = 20  # diamètre barre en mm
+    lbarre = np.arange(300, 300+0.01, 1)
     Ebarre = tools.MATIERE["acier"]["E"]  # module de Young laiton en MPa
-    Ibarre=moment_quadra(dbarre)
+    Ibarre=moment_quadra_cylindre(dbarre)
 
     k=[]
 
